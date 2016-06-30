@@ -1,0 +1,1 @@
+Put this directory your Javascripts
