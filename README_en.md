@@ -2,6 +2,8 @@
 
 # Skeleton Go!Sync
 
+[![Build Status](https://travis-ci.org/williamcanin/skeleton-gosync.svg?branch=master)](https://travis-ci.org/williamcanin/skeleton-gosync)
+
 Simple boilerplate with [Gulp](http://gulpjs.com/) and [Browser Sync](https://www.browsersync.io) for projects HTML.
 
 ### Intro
