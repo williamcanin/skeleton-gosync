@@ -3,9 +3,14 @@ node_js:
   - "6.2"
   - "6.1"
   - "6"
+cache:
+  directories:
+  - node_modules
 before_script:
-  - gem install jekyll
   - npm install -g gulp
+  - gem install jekyll
+# Build docs, test build
+script:
+- gulp build
 install:
   - npm install
-sudo: false
