@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+html.no-js(lang="en")
+    include ../includes/head.pug
+    block head
+    body
+        //- Include navbar global.
+        include ../includes/navbar.pug
+
+        //- Create blocks
+        block content
+        block footer
+
+        //- Include scripts | src
+        include ../includes/scripts.pug
+
+        //- Add block for script pages single.
+        block scripts 

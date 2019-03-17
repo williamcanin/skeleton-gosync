@@ -51,13 +51,9 @@ Session.vim
 
 # Projects: common ignored files
 # ----------------------------------------------------------------------------------------------
-notes
+temp
 node_modules
-build
-bower_components
-Gemfile.lock
-nohup.out
-.publish
-.sass-cache
-.git
-_site
+app/assets/css/
+app/assets/vendor/
+app/assets/js/
+app/assets/**/*.html

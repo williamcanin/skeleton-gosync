@@ -1,199 +1,95 @@
-/*
-File: gulpfile.js
-Description: Task Manager.
-License: MIT
-By: William Canin
-*/
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const minifyCSS = require('gulp-csso');
+const pug = require('gulp-pug');
+const del = require('del');
+const rename = require('gulp-rename');
+const browserSync = require('browser-sync').create();
+const config = {
+    watch:[
+        "src/scss/*.scss",
+        "src/js/*.js",
+        "src/templates/**/*.pug"
+    ]
+}
+const site_root = 'app/';
 
-'use strict';
+function reload(){
+    return browserSync.reload();
+}
 
+// gulp.task('clean:all', function () {
+//     return del.sync(['app/**', '!app', '!app/assets/images/text.txt'])
+// });
 
-
-
-/* LOAD PLUGINS
-______________________________________________________________________________________ */
-
-var gulp = require( 'gulp' ),
-    sass = require('gulp-sass'),
-    rename = require('gulp-rename'),
-    notify = require('gulp-notify'),
-    plumber = require('gulp-plumber'),
-    cp = require('child_process'),
-    jshint = require('gulp-jshint'),
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
-    htmlmin = require('gulp-htmlmin'),
-    imagemin = require('gulp-imagemin'),
-    strip = require('gulp-strip-comments'),
-    rimraf = require('gulp-rimraf'),
-    browserSync = require('browser-sync').create(),
-    taskListing = require('gulp-task-listing'),
-    sourcemaps = require('gulp-sourcemaps');
-
-
-
-
-/* VARIABLES FILES AND DIRECTORYS
-______________________________________________________________________________________ */
-var config = require('./config.json');
-
-
-
-
-/* CLEAN BUILD
-______________________________________________________________________________________ */
-
-gulp.task('cleanbuild', function() {
- gulp.src(config.build.dir, { read: false })
-   .pipe(rimraf())
-   .pipe(notify({ message: 'Task "cleanbuild": Cleaning the compiled files. Done!' }));
+gulp.task('clean:css', function () {
+    return del([site_root + 'assets/css/'])
 });
 
-
-
-
-/* COPY FILES: VENDOR.
-______________________________________________________________________________________ */
-
-gulp.task('copyfiles', function(){
-    gulp.src(config.src.vendor.files)
-      .pipe(gulp.dest(config.build.vendor.dir+''))
-    gulp.src(config.src.txtFiles)
-      .pipe(gulp.dest(config.build.dir+''))
+gulp.task('clean:js', function () {
+    return del([site_root + 'assets/js/'])
 });
 
+gulp.task('clean:html', function () {
+    return del([site_root + '**/*.html'])
+});
 
+gulp.task('clean:vendor', function() {
+    return del([site_root + 'assets/vendor'])
+});
 
+gulp.task('pug', gulp.series('clean:html', function () {
+    return gulp.src(['src/templates/pages/**/*.pug'])
+      .pipe(pug())
+      .pipe(gulp.dest(site_root))
+}));
 
-/* CONCAT AND COMPRESS STYLESHEETS
-______________________________________________________________________________________ */
+gulp.task('bootstrap:css', function() {
+    return gulp.src(['node_modules/bootstrap/scss/bootstrap.scss'])
+    .pipe(sass())
+    .pipe(minifyCSS())
+    .pipe(rename({ suffix: ".min" }))
+    .pipe(gulp.dest(site_root + 'assets/vendor/bootstrap/css'));
+});
 
-    gulp.task('stylesheets', function () {
-        gulp.src(config.src.scss.dir + '/main.scss')
-            .pipe(plumber())
-            // .pipe(sourcemaps.init())
-            .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-            .pipe(rename('style.min.css'))
-            // .pipe(sourcemaps.write())
-            .pipe(gulp.dest(config.build.css.dir+''))
-            .pipe(notify({ message: 'Task "stylesheets": Concatenation and compression of SASS for CSS. Done!' }));
+gulp.task('bootstrap:js', function() {
+    return gulp.src(['node_modules/bootstrap/dist/js/bootstrap.js', 
+        'node_modules/bootstrap/dist/js/bootstrap.bundle.js']
+    )
+    .pipe(rename({ suffix: ".min" }))
+    .pipe(gulp.dest(site_root + 'assets/vendor/bootstrap/js'));
+});
+
+gulp.task('jquery', function() {
+    return gulp.src('node_modules/jquery/dist/jquery.js')
+    .pipe(rename({ suffix: ".min" }))
+    .pipe(gulp.dest(site_root + 'assets/vendor/jquery'))
+});
+
+gulp.task('styles', gulp.series('clean:css', function () {
+  return gulp.src(['src/scss/**/*.scss'])
+    .pipe(sass())
+    .pipe(minifyCSS())
+    .pipe(rename({ suffix: ".min" }))
+    .pipe(gulp.dest(site_root + 'assets/css'));
+}));
+
+gulp.task('js', gulp.series('clean:js', function () {
+    return gulp.src(['src/js/**/*.js'], { sourcemaps: true }
+    )
+    .pipe(rename({ suffix: ".min" }))
+    .pipe(gulp.dest(site_root + 'assets/js', { sourcemaps: true }));
+}));
+
+gulp.task('serve', gulp.series(['bootstrap:css', 'bootstrap:js', 'jquery', 'pug', 'js', 'styles'], function (){
+    browserSync.init({
+        server: {
+            baseDir: site_root
+        }
     });
+    
+    gulp.watch(config.watch, gulp.series('js', 'styles', 'pug')).on('change', reload);
+}));
 
-
-
-
-/* CONCAT AND COMPRESS JAVASCRIPTS
-______________________________________________________________________________________ */
-    gulp.task('javascripts', function() {
-      gulp.src(config.src.js.files)
-        .pipe(jshint())
-        .pipe(concat('scripts.js'))
-        .pipe(rename('scripts.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest(config.build.js.dir+''))
-        .pipe(notify({ message: 'Task "javascripts": Concatenation and compression javascripts. Done!' }));
-    });
-
-
-
-
-
-/* HTML MINIFY AND REMOVE COMMENTS
-______________________________________________________________________________________ */
-
-    gulp.task('htmlminify', function () {
-       gulp.src(config.src.html.files)
-        .pipe(strip())
-        .pipe(htmlmin({
-            collapseWhitespace: true
-            ,minifyJS: true
-            ,minifyURLs: true
-            /*Array of regex'es that allow to ignore certain fragments, when matched:
-             View Doc in: https://github.com/kangax/html-minifier
-            */
-            ,ignoreCustomFragments: [ /<%[\s\S]*?%>/, /<\?[\s\S]*?\?>/, /'<[\s\S]*?\/>'/, /"<[\s\S]*?\/>"/ ]
-            ,html5: true
-        }))
-        .pipe(gulp.dest(config.build.dir+''))
-        .pipe(notify({ message: 'Task "htmlminify": html minified and Removed comments. Done!' }));
-    });
-
-
-
-
-/* IMAGE MINIFY
-______________________________________________________________________________________ */
-
-    gulp.task('imagemin', function () {
-        gulp.src(config.src.images.files)
-            .pipe(imagemin())
-            .pipe(gulp.dest(config.build.images.dir+''))
-            .pipe(notify({ message: 'Task "imagemin": Minification pictures. Done!' }));
-    });
-
-
-
-
-/* BROWSER SYNC CONFIGURATION
-______________________________________________________________________________________ */
-
-    gulp.task('browser-sync', function() {
-        browserSync.init({
-            reloadDelay: 2000,
-            port: config.browserSync.port+'',
-            server: {
-                baseDir: config.build.dir+''
-            }
-        });
-    });
-
-
-
-/* BROWSER SYNC RELOAD
-______________________________________________________________________________________ */
-
-    gulp.task('browser-sync-reload', function () {
-        browserSync.reload();
-    });
-
-
-
-
-/* REBUILD WHEN IS CHANGED FILES
-______________________________________________________________________________________ */
-
-    gulp.task('watch-files', function () {
-        gulp.watch(config.src.js.files , ['javascripts','browser-sync-reload']);
-        gulp.watch(config.src.scss.files , ['stylesheets','browser-sync-reload']);
-        gulp.watch(config.src.html.files , ['htmlminify','browser-sync-reload']);
-    });
-
-
-
-
-
-/* TASKS
-______________________________________________________________________________________ */
-    gulp.task('default', taskListing.withFilters(/:/));
-
-    gulp.task('clean-build', [
-        'cleanbuild'
-    ]);
-
-    gulp.task('build', [
-        'copyfiles',
-        'stylesheets',
-        'javascripts',
-        'htmlminify',
-        'imagemin'
-    ]);
-
-    gulp.task('serve', [
-        'copyfiles',
-        'stylesheets',
-        'javascripts',
-        'htmlminify',
-        'imagemin',
-        'browser-sync',
-        'watch-files'
-    ]);
+gulp.task('clean:all', gulp.series(['clean:css', 'clean:js', 'clean:html', 'clean:vendor']));
+gulp.task('build', gulp.series(['bootstrap:css', 'bootstrap:js', 'jquery', 'pug', 'js', 'styles']));
