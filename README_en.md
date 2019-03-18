@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.org/williamcanin/skeleton-gosync.svg?branch=master)](https://travis-ci.org/williamcanin/skeleton-gosync)
 
-Simple boilerplate with [Gulp](http://gulpjs.com/), [Pug](http://pugjs.org) and [Browser Sync](https://www.browsersync.io) for projects HTML.
+Simple boilerplate with [Gulp](http://gulpjs.com/), [Twitter Bootstrap](http://getbootstrap.com), [Pug](http://pugjs.org) and [Browser Sync](https://www.browsersync.io) for projects HTML.
 
 ### Intro
 
