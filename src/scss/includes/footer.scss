@@ -1,0 +1,14 @@
+// llustrative code - Skeleton Go!Sync [Remove this code]
+.footer{
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
+    background-color: #f0f0f0;
+    height: 25px;
+    &__link{
+        text-decoration: none;
+        &:hover{
+            color: black;
+            text-decoration: none;
+        }
+    }
+}

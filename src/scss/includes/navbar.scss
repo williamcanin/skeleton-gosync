@@ -1,0 +1,20 @@
+// llustrative code - Skeleton Go!Sync [Remove this code]
+.nav{
+    font-family: 'Roboto', sans-serif;
+    &__brand{
+       color: black;
+       font-size: 1.2rem;
+       font-weight: bold;
+       &:hover{
+           color: #000000; 
+       }
+    }
+    &__link{
+        font-weight: lighter;
+        color: #3a7fce;
+        font-size: 1.44rem;
+        &:hover{
+            color: black;
+        }
+    }
+}

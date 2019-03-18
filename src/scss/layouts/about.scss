@@ -1,0 +1,16 @@
+.about{
+    // height: 500px;
+    font-family: 'Roboto', sans-serif;
+    // @media (min-width: 992px) {
+    //     width: 50%;
+    // }        
+    &__wrapper{}
+    &__text{
+        font-family: 'Roboto', sans-serif;
+        font-weight: lighter;
+        font-size: 1.4rem;
+    }
+    // &__link{
+    //     width: 135px;
+    // }
+}

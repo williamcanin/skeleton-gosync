@@ -2,6 +2,9 @@
 html.no-js(lang="en")
     include ../includes/head.pug
     body
+        //- Include configs.
+        include ../config/config.pug
+        
         //- Include navbar global.
         include ../includes/navbar.pug
 
@@ -9,8 +12,12 @@ html.no-js(lang="en")
         block content
         block footer
 
+        //- Footer
+        include ../includes/footer.pug
+
         //- Include scripts | src
         include ../includes/scripts.pug
 
         //- Add block for script pages single.
         block scripts 
+

@@ -20,14 +20,14 @@ import imagemin from 'gulp-imagemin';
 
 let config = {
     watch:[
-        "src/scss/*.scss",
+        "src/scss/**/*.scss",
         "src/js/*.js",
         "src/templates/**/*.pug"
     ]
 }
 
 function reload_server(){
-    return browserSync.reload_server();
+    return browserSync.reload();
 }
 
 gulp.task('clean:all', () =>

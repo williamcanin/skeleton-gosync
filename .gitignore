@@ -52,6 +52,7 @@ Session.vim
 # Projects: common ignored files
 # ----------------------------------------------------------------------------------------------
 temp
+metas.txt
 node_modules
 app/assets/css/
 app/assets/js/

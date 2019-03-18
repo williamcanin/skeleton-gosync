@@ -1,16 +1,19 @@
 extends ../layouts/default.pug
 
+//- Head for this page.
 block head
     link(rel="stylesheet", href="/assets/css/layouts/home.min.css")
 
+//- Content
 block content
 
     //- llustrative code - Skeleton Go!Sync [Remove this code]
 
-    main.container
-        div.row
+    div.container.d-flex.justify-content-center.home
+        div.row.align-items-center.home__wrapper
             div.col-md-12
-                p Simple boilerplate with 
+                h1.home__title < Skeleton Go!Sync />
+                p.home__content Simple boilerplate with 
                     a(href="http://getbootstrap.com", target="_blank") Twitter Bootstrap
                     | ,                 
                     a(href="http://pugjs.org", target="_blank") Pug
