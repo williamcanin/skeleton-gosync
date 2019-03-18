@@ -32,7 +32,7 @@ Simples boilerplate com [Gulp](http://gulpjs.com/),  [Twitter Bootstrap](http://
 | Ruby            |  2.6.1 | `ruby -v`           | [Ruby](https://www.ruby-lang.org) |
 | NodeJS          | 11.10.1| `node -v`          | [Nodejs](http://nodejs.org/) |
 | Npm             | 6.8.0  | `npm --version`     | **Nodejs** contains **Npm** |
-| Gulp            | 4.0.0  | `gulp -v`           | `sudo npm install -g gulp` |
+| Gulp            | 4.0.0  | `gulp -v`           | [Gulp](http://gulpjs.com/) |
 
 
 > Veja a documentação de cada requerimento para a instalação.
