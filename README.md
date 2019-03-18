@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.org/williamcanin/skeleton-gosync.svg?branch=master)](https://travis-ci.org/williamcanin/skeleton-gosync)
 
-Simples boilerplate com [Gulp](http://gulpjs.com/),  [Twitter Bootstrap](http://getbootstrap.com),, [Pug](http://pugjs.org) e [Browser Sync](https://www.browsersync.io) para projetos em HTML.
+Simples boilerplate com [Gulp](http://gulpjs.com/) (com Babel 7),  [Twitter Bootstrap](http://getbootstrap.com),, [Pug](http://pugjs.org) e [Browser Sync](https://www.browsersync.io) para projetos em HTML.
 
 ### Introdução
 
@@ -29,7 +29,6 @@ Simples boilerplate com [Gulp](http://gulpjs.com/),  [Twitter Bootstrap](http://
 | Requerido       | Versão | Como verificar      | Como instalar  |
 | --------------- | -------| ------------------- | -------------- | 
 | Git             |  2.21  | `git --version`     | [Git](http://git-scm.com/) |
-| Ruby            |  2.6.1 | `ruby -v`           | [Ruby](https://www.ruby-lang.org) |
 | NodeJS          | 11.10.1| `node -v`          | [Nodejs](http://nodejs.org/) |
 | Npm             | 6.8.0  | `npm --version`     | **Nodejs** contains **Npm** |
 | Gulp            | 4.0.0  | `gulp -v`           | [Gulp](http://gulpjs.com/) |

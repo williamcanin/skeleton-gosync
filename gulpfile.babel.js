@@ -4,12 +4,17 @@
 //          * Gulp 4
 //  by: William C. Canin
 
+'use strict';
+
 import gulp from 'gulp';
 import sass from 'gulp-sass';
 import minifyCSS from 'gulp-csso';
 import pug from 'gulp-pug';
 import del from 'del';
 import rename from 'gulp-rename';
+import eslint from 'gulp-eslint';
+import plumber from 'gulp-plumber';
+import uglify from 'gulp-uglify';
 import browserSync from 'browser-sync';
 import imagemin from 'gulp-imagemin';
 
@@ -27,6 +32,8 @@ function reload_server(){
 
 gulp.task('clean:all', () =>
     del(['app/**/*',
+        '!app',
+        '!app/robots.txt',
         '!app/assets', 
         '!app/assets/images', 
         '!app/assets/images/**/*'
@@ -54,25 +61,25 @@ gulp.task('pug', gulp.series('clean:html', () =>
 gulp.task('vendor', (done) => {
 
     gulp.src(['node_modules/bootstrap/scss/bootstrap.scss'])
+        .pipe(plumber())
         .pipe(sass())
         .pipe(minifyCSS())
         .pipe(rename({ suffix: ".min" }))
         .pipe(gulp.dest('app/assets/vendor/bootstrap/css')),
 
-    gulp.src(['node_modules/bootstrap/dist/js/bootstrap.js', 
-        'node_modules/bootstrap/dist/js/bootstrap.bundle.js'])
-        .pipe(rename({ suffix: ".min" }))
+    gulp.src(['node_modules/bootstrap/dist/js/bootstrap.min.js', 
+        'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'])
         .pipe(gulp.dest('app/assets/vendor/bootstrap/js')),
 
-    gulp.src('node_modules/jquery/dist/jquery.js')
-        .pipe(rename({ suffix: ".min" }))
-        .pipe(gulp.dest('app/assets/vendor/jquery'))
+    gulp.src('node_modules/jquery/dist/jquery.min.js')
+         .pipe(gulp.dest('app/assets/vendor/jquery'))
 
     done();
 });
 
 gulp.task('styles', gulp.series('clean:css', () =>
     gulp.src(['src/scss/**/*.scss'])
+        .pipe(plumber())
         .pipe(sass())
         .pipe(minifyCSS())
         .pipe(rename({ suffix: ".min" }))
@@ -80,9 +87,14 @@ gulp.task('styles', gulp.series('clean:css', () =>
 ));
 
 gulp.task('js', gulp.series('clean:js', () =>
-    gulp.src(['src/js/**/*.js'], { sourcemaps: true })
+    gulp.src(['src/js/**/*.js'])
+        // Eslint (Default: disabled)
+        // .pipe(eslint())
+        // .pipe(eslint.format())
+        // .pipe(eslint.failAfterError())
         .pipe(rename({ suffix: ".min" }))
-        .pipe(gulp.dest('app/assets/js', { sourcemaps: true }))
+        .pipe(uglify())
+        .pipe(gulp.dest('app/assets/js'))
 ));
 
 gulp.task('imagemin', () => 
@@ -106,10 +118,13 @@ gulp.task('serve', gulp.series('imagemin','vendor', 'pug', 'js', 'styles', () =>
         server: {
             baseDir: 'app/'
         }
-    }),  
+    }),
     gulp.watch(config.watch, gulp.series('js', 'styles', 'pug')).on('change', reload_server)
 }));
 
+gulp.task('assets', 
+        gulp.series(['clean:all', 'imagemin', 'vendor', 'js', 'styles'
+]));
 
 gulp.task('build', 
         gulp.series(['imagemin', 'vendor', 'pug', 'js', 'styles'
