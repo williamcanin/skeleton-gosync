@@ -11,6 +11,7 @@ import pug from 'gulp-pug';
 import del from 'del';
 import rename from 'gulp-rename';
 import browserSync from 'browser-sync';
+import imagemin from 'gulp-imagemin';
 
 let config = {
     watch:[
@@ -84,7 +85,23 @@ gulp.task('js', gulp.series('clean:js', () =>
         .pipe(gulp.dest('app/assets/js', { sourcemaps: true }))
 ));
 
-gulp.task('serve', gulp.series('vendor', 'pug', 'js', 'styles', () => {
+gulp.task('imagemin', () => 
+    gulp.src(['app/assets/images/**/*'])
+        .pipe(imagemin([
+            imagemin.gifsicle({interlaced: true}),
+            imagemin.jpegtran({progressive: true}),
+            imagemin.optipng({optimizationLevel: 5}),
+            imagemin.svgo({
+                plugins: [
+                    {removeViewBox: true},
+                    {cleanupIDs: false}
+                ]
+            })
+        ]))
+        .pipe(gulp.dest('app/assets/images'))
+);
+
+gulp.task('serve', gulp.series('imagemin','vendor', 'pug', 'js', 'styles', () => {
     browserSync.init({
         server: {
             baseDir: 'app/'
@@ -95,5 +112,5 @@ gulp.task('serve', gulp.series('vendor', 'pug', 'js', 'styles', () => {
 
 
 gulp.task('build', 
-        gulp.series(['vendor', 'pug', 'js', 'styles'
+        gulp.series(['imagemin', 'vendor', 'pug', 'js', 'styles'
 ]));
