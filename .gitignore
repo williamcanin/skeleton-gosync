@@ -54,6 +54,6 @@ Session.vim
 temp
 node_modules
 app/assets/css/
-app/assets/vendor/
 app/assets/js/
-app/assets/**/*.html
+app/assets/vendor/
+app/**/*.html
