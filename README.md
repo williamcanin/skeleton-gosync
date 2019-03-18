@@ -67,7 +67,10 @@ $ gulp serve
 
 > Nota: Não há necessidade de compilar e, em seguida, iniciar o servidor.
 
-* 4 - Você deve criar toda estrutura no diretório `src/template`
+* 4 - Você deve criar toda estrutura no diretório `src/templates` utilizando Pug.
+
+* 4.1 - A pasta `pages` é onde você deve criar suas páginas, que terá includes e blocks 
+        através das pastas `src/templates/includes` and `src/templates/layouts`.
 
 
 * 5 - Antes de hospedar seu projeto, execute o comando `gulp build` para ter 

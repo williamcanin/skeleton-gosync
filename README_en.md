@@ -67,9 +67,12 @@ $ gulp serve
 
 > Note: No need to compile and then start the server.
 
-* 4 - You must create all structure in the `src/template`. 
+* 4 - You must create all structure in the `src/templates` using Pug.
 
-* 5 -  Before you host your project, run the following command `gulp build` to make sure that all your design is complete for hosting. 
+* 4.1 - The `pages` folder is where you should create your pages, which will have includes and blocks
+         through the `src/templates/includes` and `src/templates/layouts` folders.
+
+* 5 -  Before you host your project, run the following command `gulp build` to make sure that all your design is complete for hosting.
 
 ### License
 
