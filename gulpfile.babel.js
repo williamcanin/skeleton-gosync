@@ -11,6 +11,7 @@ import sass from 'gulp-sass';
 import minifyCSS from 'gulp-csso';
 import pug from 'gulp-pug';
 import del from 'del';
+import { spawn } from 'child_process';
 import rename from 'gulp-rename';
 import eslint from 'gulp-eslint';
 import plumber from 'gulp-plumber';
@@ -28,6 +29,14 @@ let config = {
 
 function reload_server(){
     return browserSync.reload();
+}
+
+function url_server () {
+    return spawn('python3', ['./lib/python/url.py', 'serve'], {stdio: 'inherit'})
+}
+
+function url_build () {
+    return spawn('python3', ['./lib/python/url.py', 'build'], {stdio: 'inherit'})
 }
 
 gulp.task('clean:all', () =>
@@ -122,10 +131,6 @@ gulp.task('serve', gulp.series('imagemin','vendor', 'pug', 'js', 'styles', () =>
     gulp.watch(config.watch, gulp.series('js', 'styles', 'pug')).on('change', reload_server)
 }));
 
-gulp.task('assets', 
-        gulp.series(['clean:all', 'imagemin', 'vendor', 'js', 'styles'
-]));
+gulp.task('assets', gulp.series(['clean:all', 'imagemin', 'vendor', 'js', 'styles']));
 
-gulp.task('build', 
-        gulp.series(['imagemin', 'vendor', 'pug', 'js', 'styles'
-]));
+gulp.task('build', gulp.series([url_build, 'imagemin', 'vendor', 'pug', 'js', 'styles']));
