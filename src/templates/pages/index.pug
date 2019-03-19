@@ -9,19 +9,30 @@ block content
 
     //- llustrative code - Skeleton Go!Sync [Remove this code]
 
-    div.container.d-flex.justify-content-center.home
-        div.row.align-items-center.home__wrapper
-            div.col-md-12
-                h1.home__title < Skeleton Go!Sync />
-                p.home__content Simple boilerplate with 
-                    a(href="http://getbootstrap.com", target="_blank") Twitter Bootstrap
-                    | ,                 
-                    a(href="http://pugjs.org", target="_blank") Pug
-                    | , 
-                    a(href="https://gulpjs.com", target="_blank") Gulp
-                    | , and 
-                    a(href="https://www.browsersync.io/", target="_blank") Browser Sync
-                    |  for projects HTML static.
+    main.home
+        section.container.d-flex.justify-content-center.home__intro
+            div.row.align-items-center.home__intro-wrapper
+                div.col-md-12
+                    h1.home__intro-title < Skeleton Go!Sync />
+                    p.home__intro-content Simple boilerplate with 
+                        a(href="http://getbootstrap.com", target="_blank") Twitter Bootstrap
+                        | ,                 
+                        a(href="http://pugjs.org", target="_blank") Pug
+                        | , 
+                        a(href="https://gulpjs.com", target="_blank") Gulp
+                        | , and 
+                        a(href="https://www.browsersync.io/", target="_blank") Browser Sync
+                        |  for projects HTML static.
 
-    //- Illustrative code - Skeleton Go!Sync [Remove this code]
+        section.container.d-flex.justify-content-center.home__info
+            div.row.d-flex.align-self-center.home__info-wrapper
+                div.col-6
+                    span
+                        a.btn.btn-light.home__info-link(href="https://github.com/williamcanin/skeleton-gosync", 
+                        target="_blank") View in GitHub 
+                div.col-6
+                    span
+                        a.btn.btn-light.home__info-link(href="https://github.com/williamcanin/skeleton-gosync/issues",
+                        target="_blank") Report issues
+        //- Illustrative code - Skeleton Go!Sync [Remove this code]
     

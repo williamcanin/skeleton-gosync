@@ -1,6 +1,10 @@
 // llustrative code - Skeleton Go!Sync [Remove this code]
 .nav{
     font-family: 'Roboto', sans-serif;
+    -webkit-box-shadow: 0 8px 6px -6px #999 !important;
+    -moz-box-shadow: 0 8px 6px -6px #999 !important;
+    box-shadow: 0 8px 6px -6px #999 !important;
+    border-bottom: 2px solid black;
     &__brand{
        color: black;
        font-size: 1.2rem;
