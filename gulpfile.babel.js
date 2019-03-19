@@ -27,11 +27,11 @@ function reload_server(){
 }
 
 function url_server () {
-    return spawn('python3', ['./lib/python/url.py', 'serve'], {stdio: 'inherit'})
+    return spawn('python3', ['./lib/python/runtime/change_url.py', 'serve'], {stdio: 'inherit'})
 }
 
 function url_build () {
-    return spawn('python3', ['./lib/python/url.py', 'build'], {stdio: 'inherit'})
+    return spawn('python3', ['./lib/python/runtime/change_url.py', 'build'], {stdio: 'inherit'})
 }
 
 gulp.task('clean:all', () =>
@@ -58,7 +58,7 @@ gulp.task('clean:html', () =>
 
 gulp.task('pug', gulp.series('clean:html', () => 
     gulp.src(['src/templates/pages/**/*.pug'])
-        .pipe(pug())
+        .pipe(pug({pretty: true, basedir: __dirname + 'src/templates/includes'}))
         .pipe(gulp.dest('app/'))
 ));
 
