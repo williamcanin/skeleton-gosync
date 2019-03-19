@@ -23,7 +23,8 @@ let config = {
     watch:[
         "src/scss/**/*.scss",
         "src/js/*.js",
-        "src/templates/**/*.pug"
+        "src/templates/**/*.pug",
+        "lib/python/url.pug"
     ]
 }
 
@@ -122,7 +123,7 @@ gulp.task('imagemin', () =>
         .pipe(gulp.dest('app/assets/images'))
 );
 
-gulp.task('serve', gulp.series('imagemin','vendor', 'pug', 'js', 'styles', () => {
+gulp.task('serve', gulp.series(url_server, 'imagemin','vendor', 'pug', 'js', 'styles', () => {
     browserSync.init({
         server: {
             baseDir: 'app/'

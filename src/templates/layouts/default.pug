@@ -3,8 +3,7 @@ html.no-js(lang="en")
     include ../includes/head.pug
     body
         //- URL your site.
-        //- NOTE: Leave the 'url' blank if it is in production.
-        - var url = "";
+        include ../../../lib/python/url.pug 
         - var baseurl = "/";
         
         //- Include navbar global.
