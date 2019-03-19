@@ -2,11 +2,13 @@
 html.no-js(lang="en")
     include ../includes/head.pug
     body
-        //- Include configs.
-        include ../config/config.pug
+        //- URL your site.
+        //- NOTE: Leave the 'url' blank if it is in production.
+        - var url = "";
+        - var baseurl = "/";
         
         //- Include navbar global.
-        include ../includes/navbar.pug
+        include ../includes/navbar.pug 
 
         //- Create blocks
         block content

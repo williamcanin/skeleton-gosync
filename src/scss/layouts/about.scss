@@ -1,19 +1,12 @@
+// llustrative code - Skeleton Go!Sync [Remove this code]
 .about{
     // Navbar fixed top
-    min-height: 75rem;
-    padding-top: 4.5rem;
-    // height: 500px;
+    padding-top: 8%;
+
     font-family: 'Roboto', sans-serif;
-    // @media (min-width: 992px) {
-    //     width: 50%;
-    // }        
-    &__wrapper{}
     &__text{
         font-family: 'Roboto', sans-serif;
         font-weight: lighter;
         font-size: 1.4rem;
     }
-    // &__link{
-    //     width: 135px;
-    // }
 }

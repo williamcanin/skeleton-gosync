@@ -1,43 +1,12 @@
 // llustrative code - Skeleton Go!Sync [Remove this code]
-// .home{
-//     &__intro{
-//         // height: 500px;
-//         font-family: 'Roboto', sans-serif;
-//         @media (min-width: 992px) {
-//             width: 50%;
-//         }
-        
-//         &__title, &__content {
-//             text-align: center;
-//         }
-//         &__title{
-//             color: black;
-//             font-weight: normal;
-//         }
-//         &__content{
-//             color: #1d1d1d;
-//             font-size: 1.8rem;
-//             font-weight: lighter;
-//             a{
-//                 text-decoration: none;
-//                 color: #3c7ad6;
-//                 &:hover{
-//                     color: black; 
-//                 }
-//             }
-//         }
-//     }
-// }
-
 .home{
     font-family: 'Roboto', sans-serif;
-    // height: 500px;
-    // padding-top: 200px;
+    padding-top: 80px;
     &__intro{
+        margin-top: 9%;
         @media (min-width: 992px) {
             width: 50%;
-        }         
-        &-wrapper{}
+        }    
         &-title{
             text-align: center;
             color: black;
@@ -58,7 +27,6 @@
         }
     }
     &__info{
-        &-wrapper{}
         &-link{
             width: 134px;
         }
