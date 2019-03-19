@@ -13,20 +13,14 @@ import pug from 'gulp-pug';
 import del from 'del';
 import { spawn } from 'child_process';
 import rename from 'gulp-rename';
+import fs from 'fs';
 import eslint from 'gulp-eslint';
 import plumber from 'gulp-plumber';
 import uglify from 'gulp-uglify';
 import browserSync from 'browser-sync';
 import imagemin from 'gulp-imagemin';
 
-let config = {
-    watch:[
-        "src/scss/**/*.scss",
-        "src/js/*.js",
-        "src/templates/**/*.pug",
-        "lib/python/url.pug"
-    ]
-}
+let config = JSON.parse(fs.readFileSync('./config.json'));
 
 function reload_server(){
     return browserSync.reload();
@@ -127,7 +121,8 @@ gulp.task('serve', gulp.series(url_server, 'imagemin','vendor', 'pug', 'js', 'st
     browserSync.init({
         server: {
             baseDir: 'app/'
-        }
+        },
+        "port": config.server.port
     }),
     gulp.watch(config.watch, gulp.series('js', 'styles', 'pug')).on('change', reload_server)
 }));

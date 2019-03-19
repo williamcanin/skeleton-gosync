@@ -14,7 +14,7 @@ def config_load():
     return data
 
 def get_url_server():
-    target = config_load()['server']['proxy']['target']
+    target = "http://localhost"
     port = config_load()['server']['port']
     url = f"{target}:{port}"
     return url
