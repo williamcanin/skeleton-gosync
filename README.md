@@ -69,7 +69,7 @@ $ gulp serve
 
 * 4 - Você deve criar toda estrutura no diretório `src/templates` utilizando Pug.
 
-* 4.1 - A pasta `pages` é onde você deve criar suas páginas, que terá includes e blocks 
+* 4.1 - A pasta `views` é onde você deve criar suas páginas, que terá includes e blocks 
         através das pastas `src/templates/includes` and `src/templates/layouts`.
 
 

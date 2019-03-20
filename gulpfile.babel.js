@@ -57,8 +57,9 @@ gulp.task('clean:html', () =>
 );
 
 gulp.task('pug', gulp.series('clean:html', () => 
-    gulp.src(['src/templates/pages/**/*.pug'])
-        .pipe(pug({pretty: true, basedir: __dirname + 'src/templates/includes'}))
+    gulp.src(['src/views/**/*.pug'])
+        // .pipe(pug({pretty: false, basedir: __dirname + 'src/templates'}))
+        .pipe(pug({pretty: false}))
         .pipe(gulp.dest('app/'))
 ));
 

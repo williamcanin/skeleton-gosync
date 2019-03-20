@@ -43,9 +43,9 @@ def change_url(url):
 if __name__ == "__main__":
     try:
         if menu().set == 'serve':
-            # change_url(get_url_server())
+            change_url(get_url_server())
             # or
-            change_url(" ")
+            # change_url(" ")
         elif menu().set == 'build':
             change_url(get_url_build())
 
