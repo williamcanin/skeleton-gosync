@@ -2,23 +2,25 @@
 html.no-js(lang="en")
     include ../includes/head.pug
     body
-        //- URL your site.
-        include ../../../lib/pug/url.pug
-        - var baseurl = "/";
-        
-        //- Include navbar global
-        include ../includes/navbar.pug
+        main.default
+            //- URL your site.
+            include ../../../lib/pug/url.pug
+            - var baseurl = "/";
+            - var urlsite = url + baseurl;
+            
+            //- Include navbar global
+            include ../includes/navbar.pug
 
-        //- Create blocks
-        block content
-        block footer
+            //- Create blocks
+            block content
+            block footer
 
-        //- Footer
-        include ../includes/footer.pug
+            //- Footer
+            include ../includes/footer.pug
 
-        //- Include scripts | src
-        include ../includes/scripts.pug
+            //- Include scripts | src
+            include ../includes/scripts.pug
 
-        //- Add block for script pages single.
-        block scripts 
+            //- Add block for script pages single.
+            block scripts 
 

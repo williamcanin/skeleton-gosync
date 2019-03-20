@@ -32,7 +32,7 @@ def open_pug(file):
 def change_url(url):
     current_url = open_pug("lib/pug/url.pug")
     new_url = re.sub(r'-\s?var\s?url\s?=\s?\"[^\"]+\";', f'- var url = "{url}";', current_url)
-    # Options: 2
+    # Option: 2
     # new_url = re.sub(r'\"[a-z0-9:/]+\";', f'"{url}";', current_url)        
     f = open("lib/pug/url.pug", "w+")
     f.write(new_url)

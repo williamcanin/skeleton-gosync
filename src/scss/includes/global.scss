@@ -1,0 +1,11 @@
+@import "options";
+
+html{body{}}
+
+.default{
+    font-family: 'Roboto', sans-serif;
+    // Navbar fixed top
+    @if $fixed-nav == true {
+        padding-top: 8%;
+    }    
+}

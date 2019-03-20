@@ -1,11 +1,8 @@
 // llustrative code - Skeleton Go!Sync [Remove this code]
-.about{
-    // Navbar fixed top
-    padding-top: 8%;
+@import "../includes/options";
 
-    font-family: 'Roboto', sans-serif;
+.about{
     &__text{
-        font-family: 'Roboto', sans-serif;
         font-weight: lighter;
         font-size: 1.4rem;
     }
