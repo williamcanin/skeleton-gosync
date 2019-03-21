@@ -14,12 +14,13 @@ import del from 'del';
 import { spawn } from 'child_process';
 import rename from 'gulp-rename';
 import fs from 'fs';
-import eslint from 'gulp-eslint';
+// import eslint from 'gulp-eslint';
 import plumber from 'gulp-plumber';
 import uglify from 'gulp-uglify';
 import browserSync from 'browser-sync';
 import imagemin from 'gulp-imagemin';
 
+// Load configurations.
 let config = JSON.parse(fs.readFileSync('./config.json'));
 
 function reload_server(){
@@ -27,20 +28,24 @@ function reload_server(){
 }
 
 function url_server () {
-    return spawn('python3', ['./lib/python/runtime/change_url.py', 'serve'], {stdio: 'inherit'})
+    return spawn('python3', 
+                  ['./lib/python/runtime/change_url.py', 
+                   'serve'], {stdio: 'inherit'})
 }
 
 function url_build () {
-    return spawn('python3', ['./lib/python/runtime/change_url.py', 'build'], {stdio: 'inherit'})
+    return spawn('python3', 
+                  ['./lib/python/runtime/change_url.py', 
+                   'build'], {stdio: 'inherit'})
 }
 
 gulp.task('clean:all', () =>
     del(['app/**/*',
-        '!app',
-        '!app/robots.txt',
-        '!app/assets', 
-        '!app/assets/images', 
-        '!app/assets/images/**/*'
+         '!app',
+         '!app/robots.txt',
+         '!app/assets', 
+         '!app/assets/images', 
+         '!app/assets/images/**/*'
     ]) 
 );
 
@@ -65,7 +70,8 @@ gulp.task('pug', gulp.series('clean:html', () =>
 
 gulp.task('vendor', (done) => {
 
-    gulp.src(['node_modules/bootstrap/scss/bootstrap.scss', 'node_modules/bootstrap/scss/bootstrap-reboot.scss'])
+    gulp.src(['node_modules/bootstrap/scss/bootstrap.scss', 
+             'node_modules/bootstrap/scss/bootstrap-reboot.scss'])
         .pipe(plumber())
         .pipe(sass())
         .pipe(minifyCSS())
@@ -118,7 +124,8 @@ gulp.task('imagemin', () =>
         .pipe(gulp.dest('app/assets/images'))
 );
 
-gulp.task('serve', gulp.series(url_server, 'imagemin','vendor', 'pug', 'js', 'styles', () => {
+gulp.task('serve', gulp.series(url_server, 
+                              'imagemin', 'vendor', 'pug', 'js', 'styles', () => {
     browserSync.init({
         server: {
             baseDir: 'app/'
