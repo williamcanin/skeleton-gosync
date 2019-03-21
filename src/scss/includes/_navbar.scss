@@ -1,0 +1,29 @@
+/* Navbar
+––––––––––––––––––––––––––––––––––––––––––––––––––  */
+
+.nav{
+    background-color: $navbar-background;
+    -webkit-box-shadow: $navbar-box-shadow;
+    -moz-box-shadow: $navbar-box-shadow;
+    box-shadow: $navbar-box-shadow;
+    @if $fixed-nav == true {
+        top: 0;
+        position: fixed;
+    }
+    &__brand{
+       color: $navbar-brand-color;
+       font-size: $navbar-brand-font-size;
+       font-weight: $navbar-brand-font-weigh;
+       &:hover{
+           color: $navbar-brand-color-hover; 
+       }
+    }
+    &__link{
+        font-weight: $navbar-link-font-weigh;
+        color: $navbar-link-color;
+        font-size: $navbar-link-font-size;
+        &:hover{
+            color: $navbar-link-color-hover;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+/* Footer
+––––––––––––––––––––––––––––––––––––––––––––––––––  */
+
+.footer{
+    font-weight: $footer-font-weight;
+    background-color: #f0f0f0;
+    height: 25px;
+    &__link{
+        text-decoration: none;
+        color: $footer-link-color;
+        &:hover{
+            color: $footer-link-color-hover;
+            text-decoration: none;
+        }
+    }
+}

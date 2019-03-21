@@ -1,5 +1,5 @@
-// llustrative code - Skeleton Go!Sync [Remove this code]
-@import "../includes/options";
+/* Layout Home
+––––––––––––––––––––––––––––––––––––––––––––––––––  */
 
 .home{
     &__intro{
@@ -9,12 +9,12 @@
         }    
         &-title{
             text-align: center;
-            color: black;
+            color: #000;
             font-weight: normal;            
         }
         &-content{
             text-align: center;
-            color: #1d1d1d;
+            color: $content_text-color;
             font-size: 1.8rem;
             font-weight: lighter;
             a{

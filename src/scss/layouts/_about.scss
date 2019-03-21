@@ -1,0 +1,10 @@
+/* Layout About
+––––––––––––––––––––––––––––––––––––––––––––––––––  */
+
+.about{
+    margin: 50px 0px;
+    &__content{
+        font-weight: lighter;
+        font-size: 1.4rem;
+    }
+}

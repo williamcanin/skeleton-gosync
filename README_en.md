@@ -29,7 +29,8 @@ Simple boilerplate with [Gulp](http://gulpjs.com/) (with Babel 7), [Twitter Boot
 | Required       | Version | Checking      | How to install  |
 | --------------- | -------| ------------------- | -------------- | 
 | Git             |  2.21  | `git --version`     | [Git](http://git-scm.com/) |
-| NodeJS          | 11.10.1| `node -v`          | [Nodejs](http://nodejs.org/) |
+| Node            | 11.10.1| `node -v`          | [Nodejs](http://nodejs.org/) |
+| Python          | 3.x    | `python --version`  | [Python](https://www.python.org/) |
 | Npm             | 6.8.0  | `npm --version`     | **Nodejs** contains **Npm** |
 | Gulp            | 4.0.0  | `gulp -v`           | [Gulp](http://gulpjs.com/) |
 

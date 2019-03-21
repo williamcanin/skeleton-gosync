@@ -65,7 +65,7 @@ gulp.task('pug', gulp.series('clean:html', () =>
 
 gulp.task('vendor', (done) => {
 
-    gulp.src(['node_modules/bootstrap/scss/bootstrap.scss'])
+    gulp.src(['node_modules/bootstrap/scss/bootstrap.scss', 'node_modules/bootstrap/scss/bootstrap-reboot.scss'])
         .pipe(plumber())
         .pipe(sass())
         .pipe(minifyCSS())
@@ -83,7 +83,7 @@ gulp.task('vendor', (done) => {
 });
 
 gulp.task('styles', gulp.series('clean:css', () =>
-    gulp.src(['src/scss/**/*.scss'])
+    gulp.src(['src/scss/style.scss'])
         .pipe(plumber())
         .pipe(sass())
         .pipe(minifyCSS())

@@ -1,0 +1,10 @@
+/* Layout Default
+––––––––––––––––––––––––––––––––––––––––––––––––––  */
+
+.main{
+    font-family: $font-family__primary;
+    // Navbar fixed top
+    @if $fixed-nav == true {
+        padding-top: 8%;
+    }    
+}

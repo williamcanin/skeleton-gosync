@@ -2,13 +2,14 @@
     "url": "https://yoursite.com",
 
     "server":{
-      "port": "3000"
+      "port": "3010"
     },
 
     "watch": [
       "src/scss/**/*.scss",
       "src/js/*.js",
       "src/templates/**/*.pug",
+      "src/views/**/*.pug",
       "lib/python/url.pug"
   ]    
 }

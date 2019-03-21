@@ -1,15 +1,9 @@
-extends ../templates/layouts/default.pug
-
-//- Head for this page.
-block head
-    link(rel="stylesheet", href="/assets/css/layouts/home.min.css")
+extends ../templates/layouts/main.pug
 
 //- Content
 block content
 
-    //- llustrative code - Skeleton Go!Sync [Remove this code]
-
-    main.home
+    div.home
         section.container.d-flex.justify-content-center.home__intro
             div.row.align-items-center
                 div.col-md-12
@@ -29,10 +23,9 @@ block content
                 div.col-6
                     span
                         a.btn.btn-primary.home__info-link(href="https://github.com/williamcanin/skeleton-gosync", 
-                        target="_blank") View in GitHub 
+                        target="_blank") View in GitHub
                 div.col-6
                     span
                         a.btn.btn-success.home__info-link(href="https://github.com/williamcanin/skeleton-gosync/issues",
                         target="_blank") Report issues
-        //- Illustrative code - Skeleton Go!Sync [Remove this code]
     
