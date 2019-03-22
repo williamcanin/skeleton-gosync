@@ -24,7 +24,6 @@
     "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
     "@babel/register": "^7.0.0",
-    "autoprefixer": "^9.5.0",
     "browser-sync": "^2.26.3",
     "child_process": "^1.0.2",
     "del": "^4.0.0",
@@ -43,7 +42,6 @@
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
-    "jquery": "^3.3.1",
-    "modernizr": "^3.7.1"
+    "jquery": "^3.3.1"
   }
 }

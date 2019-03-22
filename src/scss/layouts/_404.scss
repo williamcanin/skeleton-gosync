@@ -1,2 +1,9 @@
 /* Layout 404
 ––––––––––––––––––––––––––––––––––––––––––––––––––  */
+
+.error404{
+    padding-top: 8%;
+    &__content{
+        text-align: center;
+    }
+}

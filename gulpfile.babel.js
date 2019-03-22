@@ -3,6 +3,7 @@
 //          * Babel 7
 //          * Gulp 4
 //  by: William C. Canin
+// PERIGO!!! Não altere esse arquivo a menos que você saiba o que está fazendo.
 
 'use strict';
 
@@ -43,6 +44,7 @@ gulp.task('clean:all', () =>
     del(['app/**/*',
          '!app',
          '!app/robots.txt',
+         '!app/CNAME',
          '!app/assets', 
          '!app/assets/images', 
          '!app/assets/images/**/*'
@@ -128,7 +130,7 @@ gulp.task('serve', gulp.series(url_server,
                               'imagemin', 'vendor', 'pug', 'js', 'styles', () => {
     browserSync.init({
         server: {
-            baseDir: 'app/'
+            baseDir: 'app/'         
         },
         "port": config.server.port
     }),
@@ -138,3 +140,4 @@ gulp.task('serve', gulp.series(url_server,
 gulp.task('assets', gulp.series(['clean:all', 'imagemin', 'vendor', 'js', 'styles']));
 
 gulp.task('build', gulp.series([url_build, 'imagemin', 'vendor', 'pug', 'js', 'styles']));
+

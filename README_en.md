@@ -38,42 +38,62 @@ Simple boilerplate with [Gulp](http://gulpjs.com/) (with Babel 7), [Twitter Boot
 > See the documentation for each application to install.
 
 
-### Usage
+### Installing
 
 After installing all of the above requirements, do the following commands:
 
 * 1 - Make Clone **Skeleton Go!Sync** and go to the folder:
 
 ~~~
-$ git clone https://github.com/williamcanin/skeleton-gosync.git "name_your_project"; cd name_your_project
+$ git clone https://github.com/williamcanin/skeleton-gosync.git "mysite"; cd mysite
 ~~~
 
-* 1 - Installing dependencies:
+* 1 - Installing the **Skeleton Go!Sync** dependencies:
 
 ~~~
 $ npm install
 ~~~
 
-* 2 - To compile:
+### Compiling
+
+* Use the command below to compile your project:
 
 ~~~
 $ gulp build
 ~~~
 
-* 3 - Starting the server and monitoring:
+or
+
+~~~
+$ $(npm bin)/gulp build
+~~~
+
+Note: Your site will be compiled into the `app` folder.
+
+### Starting local server
+
+* The following command launches a local server with [Browser Sync](https://www.browsersync.io) (for development):
 
 ~~~
 $ gulp serve
 ~~~
 
-> Note: No need to compile and then start the server.
+or
 
-* 4 - You must create all structure in the `src/templates` using Pug.
+~~~
+$ $(npm bin)/gulp serve
+~~~
 
-* 4.1 - The `views` folder is where you should create your pages, which will have includes and blocks
-         through the `src/templates/includes` and `src/templates/layouts` folders.
+> Note 1: For more gulp tasks, use `gulp --tasks`.
+> Note 2: No need to compile and then start the server.
 
-* 5 -  Before you host your project, run the following command `gulp build` to make sure that all your design is complete for hosting.
+### Development
+
+* 1 - You should create any layout structure for your project in the `src/templates` directory using [Pug](http://pugjs.org).
+
+* 2 - The `src/views` folder is where you should create your pages, which will have includes, extends and         blocks through the `src/templates/includes` and `src/templates/layouts` folders.
+
+* 3 -  Before hosting your project on the server, change in `config.json` the value of `url`, by placing the url of your site. After that, you can run the `gulp build` command and host.
 
 ### License
 

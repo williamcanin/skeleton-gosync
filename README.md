@@ -34,48 +34,65 @@ Simples boilerplate com [Gulp](http://gulpjs.com/) (com Babel 7), [Twitter Boots
 | Npm             | 6.8.0  | `npm --version`     | **Nodejs** contains **Npm** |
 | Gulp            | 4.0.0  | `gulp -v`           | [Gulp](http://gulpjs.com/) |
 
-
 > Veja a documentação de cada requerimento para a instalação.
 
-
-### Usando
+### Instalando
 
 Após instalar todos requerimentos acima, faça os comando abaixo:
 
 1 - Faz o clone do **Skeleton Go!Sync** e acesse a pasta:
 
 ~~~
-$ git clone https://github.com/williamcanin/skeleton-gosync.git "nome_do_projeto"; cd nome_do_projeto
+$ git clone https://github.com/williamcanin/skeleton-gosync.git "mysite"; cd mysite
 ~~~
 
-* 1 - Instalando as dependências:
+* 2 - Instalando as dependências do **Skeleton Go!Sync**:
 
 ~~~
 $ npm install
 ~~~
 
-* 2 - Compilar:
+### Compilando
+
+* Use o comando abaixo para compilar seu projeto:
 
 ~~~
 $ gulp build
 ~~~
 
-* 3 - Iniciando o servidor e monitoramento:
+ou
+
+~~~
+$ $(npm bin)/gulp build
+~~~
+
+Nota: Seu site irá ser compilado na pasta `app`.
+
+### Iniciando servidor local
+
+* O comando abaixo você inicia um servidor local com o [Browser Sync](https://www.browsersync.io) (para desenvolvimento):
 
 ~~~
 $ gulp serve
 ~~~
 
-> Nota: Não há necessidade de compilar e, em seguida, iniciar o servidor.
+ou
 
-* 4 - Você deve criar toda estrutura no diretório `src/templates` utilizando Pug.
+~~~
+$ $(npm bin)/gulp serve
+~~~
 
-* 4.1 - A pasta `views` é onde você deve criar suas páginas, que terá includes e blocks 
-        através das pastas `src/templates/includes` and `src/templates/layouts`.
+> Nota 1: Para obter mais tarefas do gulp, use `gulp --tasks`.
+> Nota 2: Não há necessidade de compilar e, em seguida, iniciar o servidor.
 
+### Desenvolvimento
 
-* 5 - Antes de hospedar seu projeto, execute o comando `gulp build` para ter 
-certeza que todo seu projeto esteja completo para hospedagem.
+* 1 - Você deve criar toda estrutura de layout e includes do seu projeto no diretório `src/templates` utilizando [Pug](http://pugjs.org).
+
+* 2 - A pasta `src/views` é onde você deve criar suas páginas, que terá includes, extends e blocks
+através das pastas `src/templates/includes` and `src/templates/layouts`.
+
+* 3 - Antes de hospedar seu projeto no servidor, altere no arquivo `config.json` o valor de `url`, colocando a url do seu site. Após isso, você pode executar o comando `gulp build` e hospedar em um servidor na web.
 
 ### Licença
 
