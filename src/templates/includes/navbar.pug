@@ -1,3 +1,4 @@
+//- This is the global navbar, for all your site. Change to taste.
 nav.navbar.navbar-expand-md.static-top.nav
     a.nav__link.navbar-brand.nav__brand(href=urlsite) < Skeleton Go!Sync />
     button.navbar-toggler(type="button", data-toggle="collapse", data-target="#collapsibleNavId", 
@@ -9,3 +10,5 @@ nav.navbar.navbar-expand-md.static-top.nav
                 a.nav-link.nav__link(href=urlsite + "about/") About
             li.nav-item
                 a.nav-link.nav__link(href=urlsite + "contact/") Contact
+//- If you want another navbar, the line below will capture this new navbar on the page you create.
+block navbar

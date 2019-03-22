@@ -1,8 +1,10 @@
-// Script: Gulpfile.babel.js
+// Script: gulpfile.babel.js
 // Dependencies: 
 //          * Babel 7
 //          * Gulp 4
 //  by: William C. Canin
+
+// DANGER!!! Do not change this file unless you know what you are doing.
 // PERIGO!!! Não altere esse arquivo a menos que você saiba o que está fazendo.
 
 'use strict';
@@ -24,22 +26,27 @@ import imagemin from 'gulp-imagemin';
 // Load configurations.
 let config = JSON.parse(fs.readFileSync('./config.json'));
 
+// Function to restart browser sync server
 function reload_server(){
     return browserSync.reload();
 }
 
+// Function that executes Python script to change url to local server.
 function url_server () {
     return spawn('python3', 
                   ['./lib/python/runtime/change_url.py', 
                    'serve'], {stdio: 'inherit'})
 }
 
+
+// Function that executes Python script to change url to web server.
 function url_build () {
     return spawn('python3', 
                   ['./lib/python/runtime/change_url.py', 
                    'build'], {stdio: 'inherit'})
 }
 
+// Task to clear everything that was compiled
 gulp.task('clean:all', () =>
     del(['app/**/*',
          '!app',
@@ -51,18 +58,22 @@ gulp.task('clean:all', () =>
     ]) 
 );
 
+// Task to clean sass compilation
 gulp.task('clean:css', () =>
     del(['app/assets/css/'])
 );
 
+// Task to clean javascript compilation
 gulp.task('clean:js', () =>
     del(['app/assets/js/'])
 );
 
+// Task to clear compilation of .pug files
 gulp.task('clean:html', () =>
     del(['app/**/*.html'])
 );
 
+// Task to compile .pug file in html
 gulp.task('pug', gulp.series('clean:html', () => 
     gulp.src(['src/views/**/*.pug'])
         // .pipe(pug({pretty: false, basedir: __dirname + 'src/templates'}))
@@ -70,6 +81,7 @@ gulp.task('pug', gulp.series('clean:html', () =>
         .pipe(gulp.dest('app/'))
 ));
 
+// Task to build the project dependencies.
 gulp.task('vendor', (done) => {
 
     gulp.src(['node_modules/bootstrap/scss/bootstrap.scss', 
@@ -90,6 +102,7 @@ gulp.task('vendor', (done) => {
     done();
 });
 
+// Task to compile .scss file (your site style)
 gulp.task('styles', gulp.series('clean:css', () =>
     gulp.src(['src/scss/style.scss'])
         .pipe(plumber())
@@ -99,6 +112,7 @@ gulp.task('styles', gulp.series('clean:css', () =>
         .pipe(gulp.dest('app/assets/css'))
 ));
 
+// Task to minify the javascript of your site
 gulp.task('js', gulp.series('clean:js', () =>
     gulp.src(['src/js/**/*.js'])
         // Eslint (Default: disabled)
@@ -110,6 +124,7 @@ gulp.task('js', gulp.series('clean:js', () =>
         .pipe(gulp.dest('app/assets/js'))
 ));
 
+// Task to optimize images from the folder "assets/images".
 gulp.task('imagemin', () => 
     gulp.src(['app/assets/images/**/*'])
         .pipe(imagemin([
@@ -126,6 +141,8 @@ gulp.task('imagemin', () =>
         .pipe(gulp.dest('app/assets/images'))
 );
 
+
+// Task to start local server (Browser Sync)
 gulp.task('serve', gulp.series(url_server, 
                               'imagemin', 'vendor', 'pug', 'js', 'styles', () => {
     browserSync.init({
@@ -137,7 +154,9 @@ gulp.task('serve', gulp.series(url_server,
     gulp.watch(config.watch, gulp.series('js', 'styles', 'pug')).on('change', reload_server)
 }));
 
+// Task to compile and build only site assets.
 gulp.task('assets', gulp.series(['clean:all', 'imagemin', 'vendor', 'js', 'styles']));
 
+// Task to compile and build all website
 gulp.task('build', gulp.series([url_build, 'imagemin', 'vendor', 'pug', 'js', 'styles']));
 
