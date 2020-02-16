@@ -157,6 +157,7 @@ dist
 
 # Projects: common ignored files
 # ----------------------------------------------------------------------------------------------
+package-lock.json
 temp
 metas.txt
 stats.txt
