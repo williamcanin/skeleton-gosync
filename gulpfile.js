@@ -17,6 +17,13 @@ let browserSync = require('browser-sync').create();
 // load configurations.
 let config = JSON.parse(fs.readFileSync('./config.json'));
 
+
+
+// delete builds
+function delete_build() {
+    del('app/')
+}
+
 // copy files statics
 function copy_static() {
   return gulp
@@ -148,6 +155,7 @@ const watch = () => gulp.watch(config.watch,
 const serve = gulp.series(build, url_server, browserSync_server, watch);
 
 // export tasks
+exports.delete_build = delete_build;
 exports.copy_static = copy_static;
 exports.styles = styles;
 exports.minify_js = minify_js;
