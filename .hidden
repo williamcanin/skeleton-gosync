@@ -1,0 +1,7 @@
+node_modules
+COPYING
+CREDITS
+LICENSE
+package-lock.json
+gulpfile.js
+package.json

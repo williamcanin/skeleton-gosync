@@ -6,10 +6,11 @@
     },
 
     "watch": [
+      "src/static/**/*",
       "src/scss/**/*.scss",
       "src/js/*.js",
       "src/templates/**/*.pug",
       "src/views/**/*.pug",
-      "lib/python/url.pug"
+      "lib/pug/url.pug"
   ]    
 }

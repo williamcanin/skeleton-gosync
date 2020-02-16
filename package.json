@@ -2,7 +2,7 @@
   "name": "Skeleton-GoSync",
   "version": "1.0.2",
   "description": "Skeleton Go!Sync - Simple boilerplate with Gulp and Browser Sync for projects HTML.",
-  "main": "gulpfile.babel.js",
+  "main": "gulpfile.js",
   "scripts": {
     "postinstall": "$(npm bin)/gulp build"
   },

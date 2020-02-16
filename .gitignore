@@ -157,11 +157,6 @@ dist
 
 # Projects: common ignored files
 # ----------------------------------------------------------------------------------------------
+app/
 package-lock.json
-temp
-metas.txt
-stats.txt
-app/assets/css/
-app/assets/js/
-app/assets/vendor/
-app/**/*.html
+temp/

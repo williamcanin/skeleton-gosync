@@ -14,10 +14,17 @@ let plumber = require('gulp-plumber');
 let imagemin = require('gulp-imagemin');
 let browserSync = require('browser-sync').create();
 
-// Load configurations.
+// load configurations.
 let config = JSON.parse(fs.readFileSync('./config.json'));
 
-// Js task
+// copy files statics
+function copy_static() {
+  return gulp
+    .src('src/static/**/*')
+    .pipe(gulp.dest('app/'))
+}
+
+// js task
 function minify_js() {
   return gulp
     .src('src/js/**/*.js')
@@ -26,7 +33,7 @@ function minify_js() {
     .pipe(gulp.dest('app/assets/js'))
 }
 
-// Styles task
+// styles task
 function styles() {
   return gulp
     .src('src/scss/style.scss')
@@ -37,7 +44,7 @@ function styles() {
     .pipe(gulp.dest('app/assets/css'))
 }
 
-// Vendor bootstrap style task
+// vendor bootstrap style task
 function bootstrap_style() {
   return gulp
     .src(['node_modules/bootstrap/scss/bootstrap.scss',
@@ -49,7 +56,7 @@ function bootstrap_style() {
     .pipe(gulp.dest('app/assets/vendor/bootstrap/css'))
 }
 
-// Vendor bootstrap style task
+// vendor bootstrap style task
 function bootstrap_js() {
   return gulp
     .src(['node_modules/bootstrap/dist/js/bootstrap.min.js',
@@ -57,14 +64,14 @@ function bootstrap_js() {
     .pipe(gulp.dest('app/assets/vendor/bootstrap/js'))
 }
 
-// Vendor jquery task
+// vendor jquery task
 function jquery() {
   return gulp
     .src('node_modules/jquery/dist/jquery.min.js')
     .pipe(gulp.dest('app/assets/vendor/jquery'))
 }
 
-// Pug task
+// pug task
 function pug_to_html() {
   return gulp
     .src('src/views/**/*.pug')
@@ -72,7 +79,7 @@ function pug_to_html() {
     .pipe(gulp.dest('app/'))
 }
 
-// Pug task
+// minify images task
 function image_min() {
   return gulp
     .src('app/assets/images/**/*')
@@ -90,7 +97,21 @@ function image_min() {
     .pipe(gulp.dest('app/assets/images'))
 }
 
-// Browser Sync
+// function that executes Python script to change url to local server.
+function url_server () {
+    return spawn('python', 
+                  ['./lib/python/runtime/change_url.py',
+                   'serve'], {stdio: 'inherit'})
+}
+
+// function that executes Python script to change url to web server.
+function url_build () {
+    return spawn('python', 
+                  ['./lib/python/runtime/change_url.py', 
+                   'build'], {stdio: 'inherit'})
+}
+
+// browser-sync
 function browserSync_reload(done) {
   browserSync.reload();
   done();
@@ -107,7 +128,9 @@ function browserSync_server(done) {
 }
 
 // define tasks
-const build = gulp.series(gulp.parallel(minify_js,
+const build = gulp.series(gulp.parallel(url_build,
+										copy_static,
+										minify_js,
 										pug_to_html,
 										bootstrap_style,
 										bootstrap_js,
@@ -115,15 +138,17 @@ const build = gulp.series(gulp.parallel(minify_js,
 
 // watch changed
 const watch = () => gulp.watch(config.watch,
-							   gulp.series(styles,
+							   gulp.series(copy_static,
+							   			   styles,
 							   			   minify_js,
 							   			   pug_to_html,
 							   	           browserSync_reload));
 
-// 
-const server = gulp.series(build, browserSync_server, watch);
+// start the server
+const serve = gulp.series(build, url_server, browserSync_server, watch);
 
 // export tasks
+exports.copy_static = copy_static;
 exports.styles = styles;
 exports.minify_js = minify_js;
 exports.pug_to_html = pug_to_html;
@@ -131,6 +156,6 @@ exports.bootstrap_style = bootstrap_style;
 exports.bootstrap_js = bootstrap_js;
 exports.jquery = jquery;
 exports.image_min = image_min;
-exports.server = server;
+exports.serve = serve;
 exports.build = build;
 exports.default = build;
