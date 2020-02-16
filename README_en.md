@@ -95,6 +95,12 @@ $ $(npm bin)/gulp serve
 
 * 3 -  Before hosting your project on the server, change in `config.json` the value of `url`, by placing the url of your site. After that, you can run the `gulp build` command and host.
 
+### Donation
+
+If you liked my work, buy me a coffee :coffee: :smiley:
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YBK2HEEYG8V5W&source)
+
 ### License
 
 [MIT License](https://opensource.org/licenses/MIT) © William Canin

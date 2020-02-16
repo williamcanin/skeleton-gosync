@@ -94,6 +94,12 @@ através das pastas `src/templates/includes` and `src/templates/layouts`.
 
 * 3 - Antes de hospedar seu projeto no servidor, altere no arquivo `config.json` o valor de `url`, colocando a url do seu site. Após isso, você pode executar o comando `gulp build` e hospedar em um servidor na web.
 
+### Doação
+
+Se você gostou do meu trabalho, me compre um café <3
+
+[![paypal](https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=C4EEL62SFHZS4&source=url)
+
 ### Licença
 
 [MIT License](https://opensource.org/licenses/MIT) © William Canin
