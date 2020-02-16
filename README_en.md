@@ -28,11 +28,11 @@ Simple boilerplate with [Gulp](http://gulpjs.com/), [Twitter Bootstrap](http://g
 
 | Required       | Version | Checking      | How to install  |
 | --------------- | -------| ------------------- | -------------- | 
-| Git             | 2.25.0 | `git --version`     | [Git](http://git-scm.com/) |
-| Node            | 13.7.0 | `node -v`          | [Nodejs](http://nodejs.org/) |
-| Python          | 3.x    | `python --version`  | [Python](https://www.python.org/) |
-| Npm             | 6.13.6 | `npm --version`     | **Nodejs** contains **Npm** |
-| Gulp            | 4.0.2  | `gulp -v`           | [Gulp](http://gulpjs.com/) |
+| Git             | indifferent | `git --version`     | [Git](http://git-scm.com/) |
+| Node            | >= 12.0 | `node -v`          | [Nodejs](http://nodejs.org/) |
+| Python          | >= 3.5    | `python --version`  | [Python](https://www.python.org/) |
+| Npm             | indifferent | `npm --version`     | **Nodejs** contains **Npm** |
+| Gulp            | >=4.0.0  | `gulp -v`           | [Gulp](http://gulpjs.com/) |
 
 
 > See the documentation for each application to install.
