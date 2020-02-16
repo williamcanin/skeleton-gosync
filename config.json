@@ -5,7 +5,7 @@
       "port": "3010"
     },
     "watch": [
-      "src/static/**/*",
+      "src/common/**/*",
       "src/scss/**/*.scss",
       "src/js/*.js",
       "src/templates/**/*.pug",
