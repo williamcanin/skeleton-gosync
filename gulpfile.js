@@ -5,23 +5,23 @@ let gulp = require('gulp');
 let uglify = require('gulp-uglify');
 let sass = require('gulp-sass');
 let mincss = require('gulp-csso');
-let pug = require('gulp-pug');
-let del = require('del');
+let gulp_pug = require('gulp-pug');
+let gulp_clean = require('gulp-clean');
 let rename = require('gulp-rename');
 let { spawn } = require('child_process');
-let fs = require('fs');
 let plumber = require('gulp-plumber');
-let imagemin = require('gulp-imagemin');
+let gulp_imagemin = require('gulp-imagemin');
 let browserSync = require('browser-sync').create();
 
 // load configurations.
-let config = JSON.parse(fs.readFileSync('./config.json'));
+const config = require('./config.json');
 
 
-
-// delete builds
-function delete_build() {
-    del('app/')
+// copy files statics. error not exists
+function clean_build() {
+  return gulp
+    .src('app/*', {read: false})
+    .pipe(gulp_clean({force: true}))
 }
 
 // copy files statics
@@ -72,7 +72,7 @@ function bootstrap_js() {
 }
 
 // vendor jquery task
-function jquery() {
+function jquery_task() {
   return gulp
     .src('node_modules/jquery/dist/jquery.min.js')
     .pipe(gulp.dest('app/assets/vendor/jquery'))
@@ -82,7 +82,7 @@ function jquery() {
 function pug_to_html() {
   return gulp
     .src('src/views/**/*.pug')
-    .pipe(pug({pretty: false}))
+    .pipe(gulp_pug({pretty: false}))
     .pipe(gulp.dest('app/'))
 }
 
@@ -90,11 +90,11 @@ function pug_to_html() {
 function image_min() {
   return gulp
     .src('app/assets/images/**/*')
-    .pipe(imagemin([
-	        imagemin.gifsicle({ interlaced: true }),
-	        imagemin.mozjpeg({ progressive: true }),
-	        imagemin.optipng({ optimizationLevel: 5 }),
-            imagemin.svgo({
+    .pipe(gulp_imagemin([
+	        gulp_imagemin.gifsicle({ interlaced: true }),
+	        gulp_imagemin.mozjpeg({ progressive: true }),
+	        gulp_imagemin.optipng({ optimizationLevel: 5 }),
+            gulp_imagemin.svgo({
                 plugins: [
                     {removeViewBox: true},
                     {cleanupIDs: false}
@@ -137,11 +137,12 @@ function browserSync_server(done) {
 // define tasks
 const build = gulp.series(gulp.parallel(url_build,
 										copy_static,
+										styles,
 										minify_js,
 										pug_to_html,
 										bootstrap_style,
 										bootstrap_js,
-										jquery));
+										jquery_task));
 
 // watch changed
 const watch = () => gulp.watch(config.watch,
@@ -155,15 +156,15 @@ const watch = () => gulp.watch(config.watch,
 const serve = gulp.series(build, url_server, browserSync_server, watch);
 
 // export tasks
-exports.delete_build = delete_build;
-exports.copy_static = copy_static;
+exports.clean = clean_build;
+exports.statics = copy_static;
 exports.styles = styles;
-exports.minify_js = minify_js;
-exports.pug_to_html = pug_to_html;
+exports.js = minify_js;
+exports.pug = pug_to_html;
 exports.bootstrap_style = bootstrap_style;
 exports.bootstrap_js = bootstrap_js;
-exports.jquery = jquery;
-exports.image_min = image_min;
+exports.jquery = jquery_task;
+exports.imagemin = image_min;
 exports.serve = serve;
 exports.build = build;
 exports.default = build;
