@@ -21,7 +21,7 @@ Simples boilerplate com [Gulp](http://gulpjs.com/) (com Babel 7), [Twitter Boots
 
 * As imagens também são minificadas, porém, somente na inicialização do  Browser Sync ou na execução de compilação com a tarefa `$ gulp build` ou da própria tarefa de minificação da imagem ` gulp imagemin` .
 
-* O projeto será armazenado na pasta `app`.
+* O projeto será armazenado na pasta `public`.
 
 
 ### Requerimentos 
@@ -66,7 +66,7 @@ ou
 $ $(npm bin)/gulp build
 ~~~
 
-Nota: Seu site irá ser compilado na pasta `app`.
+Nota: Seu site irá ser compilado na pasta `public`.
 
 ### Iniciando servidor local
 

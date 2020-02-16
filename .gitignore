@@ -158,5 +158,6 @@ dist
 # Projects: common ignored files
 # ----------------------------------------------------------------------------------------------
 app/
+public/
 package-lock.json
 temp/

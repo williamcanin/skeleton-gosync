@@ -68,7 +68,7 @@ or
 $ $(npm bin)/gulp build
 ~~~
 
-Note: Your site will be compiled into the `app` folder.
+Note: Your site will be compiled into the `public` folder.
 
 ### Starting local server
 
