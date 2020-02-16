@@ -1,2 +1,2 @@
-// Script page Home 
+// Script page Home
 
