@@ -156,7 +156,14 @@ const watch = () => gulp.watch(config.watch,
 							   	           browserSync_reload));
 
 // start the server
-const serve = gulp.series(url_server, build, browserSync_server, watch);
+const serve = gulp.series(gulp.parallel(url_server,
+										copy_common,
+										styles,
+										javascripts,
+										pug_to_html,
+										vendor,
+	                                    browserSync_server,
+	                                    watch));
 
 // export tasks
 exports.clean = clean_build;
@@ -172,6 +179,3 @@ exports.serve = serve;
 exports.vendor = vendor;
 exports.build = build;
 exports.default = build;
-
-exports.url_server = url_server;
-exports.url_build = url_build;
