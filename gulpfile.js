@@ -17,22 +17,22 @@ let browserSync = require('browser-sync').create();
 const config = require('./config.json');
 
 
-// copy files statics. error not exists
+// function copy files statics
 function clean_build() {
   return gulp
     .src('app/*', {read: false})
     .pipe(gulp_clean({force: true}))
 }
 
-// copy files statics
-function copy_static() {
+// function copy files statics
+function copy_common() {
   return gulp
     .src('src/static/**/*')
     .pipe(gulp.dest('app/'))
 }
 
-// js task
-function minify_js() {
+// function javascripts
+function javascripts() {
   return gulp
     .src('src/js/**/*.js')
     .pipe(rename({ suffix: ".min" }))
@@ -40,7 +40,7 @@ function minify_js() {
     .pipe(gulp.dest('app/assets/js'))
 }
 
-// styles task
+// function styles
 function styles() {
   return gulp
     .src('src/scss/style.scss')
@@ -51,8 +51,8 @@ function styles() {
     .pipe(gulp.dest('app/assets/css'))
 }
 
-// vendor bootstrap style task
-function bootstrap_style() {
+// function vendor bootstrap styles
+function bootstrap_styles() {
   return gulp
     .src(['node_modules/bootstrap/scss/bootstrap.scss',
     	'node_modules/bootstrap/scss/bootstrap-reboot.scss'])
@@ -63,7 +63,7 @@ function bootstrap_style() {
     .pipe(gulp.dest('app/assets/vendor/bootstrap/css'))
 }
 
-// vendor bootstrap style task
+// function vendor bootstrap javascripts
 function bootstrap_js() {
   return gulp
     .src(['node_modules/bootstrap/dist/js/bootstrap.min.js',
@@ -71,14 +71,14 @@ function bootstrap_js() {
     .pipe(gulp.dest('app/assets/vendor/bootstrap/js'))
 }
 
-// vendor jquery task
-function jquery_task() {
+// function vendor jquery
+function framework_jquery() {
   return gulp
     .src('node_modules/jquery/dist/jquery.min.js')
     .pipe(gulp.dest('app/assets/vendor/jquery'))
 }
 
-// pug task
+// function pug
 function pug_to_html() {
   return gulp
     .src('src/views/**/*.pug')
@@ -86,7 +86,7 @@ function pug_to_html() {
     .pipe(gulp.dest('app/'))
 }
 
-// minify images task
+// function minify images
 function image_min() {
   return gulp
     .src('app/assets/images/**/*')
@@ -134,37 +134,44 @@ function browserSync_server(done) {
   done();
 }
 
-// define tasks
-const build = gulp.series(gulp.parallel(url_build,
-										copy_static,
-										styles,
-										minify_js,
-										pug_to_html,
-										bootstrap_style,
-										bootstrap_js,
-										jquery_task));
+// task vendor
+const vendor = gulp.series(gulp.parallel(bootstrap_styles,
+										 bootstrap_js,
+										 framework_jquery))
 
-// watch changed
+// task build
+const build = gulp.series(gulp.parallel(url_build,
+										copy_common,
+										styles,
+										javascripts,
+										pug_to_html,
+										vendor));
+
+// task watch changed
 const watch = () => gulp.watch(config.watch,
-							   gulp.series(copy_static,
+							   gulp.series(copy_common,
 							   			   styles,
-							   			   minify_js,
+							   			   javascripts,
 							   			   pug_to_html,
 							   	           browserSync_reload));
 
 // start the server
-const serve = gulp.series(build, url_server, browserSync_server, watch);
+const serve = gulp.series(url_server, build, browserSync_server, watch);
 
 // export tasks
 exports.clean = clean_build;
-exports.statics = copy_static;
+exports.common = copy_common;
 exports.styles = styles;
-exports.js = minify_js;
+exports.js = javascripts;
 exports.pug = pug_to_html;
-exports.bootstrap_style = bootstrap_style;
+exports.bootstrap_styles = bootstrap_styles;
 exports.bootstrap_js = bootstrap_js;
-exports.jquery = jquery_task;
+exports.jquery = framework_jquery;
 exports.imagemin = image_min;
 exports.serve = serve;
+exports.vendor = vendor;
 exports.build = build;
 exports.default = build;
+
+exports.url_server = url_server;
+exports.url_build = url_build;
